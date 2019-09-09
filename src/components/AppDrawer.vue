@@ -56,16 +56,16 @@
                 </v-list-tile-content>
                 <!-- <v-circle class="white--text pa-0 circle-pill" v-if="subItem.badge" color="red" disabled="disabled">{{ subItem.badge }}</v-circle> -->
                 <v-list-tile-action v-if="subItem.action">
-                  <v-icon :class="[subItem.actionClass || 'success--text']">{{
-                    subItem.action
-                  }}</v-icon>
+                  <v-icon :class="[subItem.actionClass || 'success--text']">
+                    {{ subItem.action }}
+                  </v-icon>
                 </v-list-tile-action>
               </v-list-tile>
             </template>
           </v-list-group>
-          <v-subheader v-else-if="item.header" :key="i">{{
-            item.header
-          }}</v-subheader>
+          <v-subheader v-else-if="item.header" :key="i">
+            {{ item.header }}
+          </v-subheader>
           <v-divider v-else-if="item.divider" :key="i" />
           <!--top-level link-->
           <v-list-tile
@@ -101,7 +101,7 @@
 </template>
 <script>
 import _ from 'lodash';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 
 export default {
@@ -126,6 +126,7 @@ export default {
   }),
 
   computed: {
+    ...mapGetters('login', ['role']),
     ...mapState('login', ['menus']),
     ...mapState('global', ['drawerToggled']),
 
@@ -181,8 +182,17 @@ export default {
         }
         let subMenu = [];
         _.forEach(safeMenu.items, item => {
-          if (_.has(item, 'component')) {
-            subMenu.push(item);
+          if (this.role === 'ROLE_ADMIN') {
+            if (_.has(item, 'component')) {
+              subMenu.push(item);
+            }
+          } else {
+            if (item.title === 'Duyệt sản phẩm') {
+            } else {
+              if (_.has(item, 'component')) {
+                subMenu.push(item);
+              }
+            }
           }
         });
         if (subMenu.length > 0) {
@@ -210,8 +220,8 @@ export default {
 }
 
 #logo {
-    filter: brightness(0) invert(1);
-    -webkit-filter: brightness(0) invert(1);
-    margin: 0 auto;
+  filter: brightness(0) invert(1);
+  -webkit-filter: brightness(0) invert(1);
+  margin: 0 auto;
 }
 </style>

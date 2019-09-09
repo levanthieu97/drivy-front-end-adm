@@ -21,8 +21,8 @@ router.beforeEach(async (to, from, next) => {
   store.dispatch('global/setLoading', false);
 
   let isLoginPage = to.matched.some(p => p.path.indexOf('/login') === 0);
-  let isDashboard = to.matched.some(p => p.path.indexOf('/dashboard') === 0);
   let isRegisTer = to.matched.some(p => p.path.indexOf('/register') === 0);
+  let check = to.matched.some(p => p.path.indexOf('/check') === 0);
 
   try {
     let isAuthenticated = store.getters['login/isAuthenticated'];

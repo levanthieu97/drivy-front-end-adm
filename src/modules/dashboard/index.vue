@@ -184,6 +184,8 @@ export default {
   },
 
   created() {
+    console.log('***********');
+    console.log(this.theSupplier);
     this.getStore();
     this.countProduct();
     this.countPayment();

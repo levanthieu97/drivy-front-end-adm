@@ -36,6 +36,15 @@ const DEFAULT_ROUTES = [
     component: () => import('modules/pages/Error.vue')
   },
   {
+    path: '/check/:product',
+    meta: {
+      requiresAuth: true,
+      title: 'Duyệt sản phẩm'
+    },
+    name: 'product',
+    component: () => import('modules/check')
+  },
+  {
     path: '/',
     redirect: {
       path: '/dashboard'
@@ -54,13 +63,13 @@ const DEFAULT_ROUTES = [
     name: 'Login',
     component: () => import('modules/login'),
     meta: {
-      title: 'TP Shop Login'
+      title: 'Drivy Shop Login'
     }
   },
   {
     path: '/register',
     meta: {
-      title: 'Đăng ký bán hàng cùng TP Shop'
+      title: 'Đăng ký bán hàng cùng Drivy'
     },
     name: 'Register',
     component: () => import('modules/register')

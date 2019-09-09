@@ -5,6 +5,7 @@ const Menu = [
     icon: 'cast_connected',
     name: 'Dashboard'
   },
+
   {
     title: 'Sản phẩm',
     group: 'products',
@@ -18,6 +19,10 @@ const Menu = [
       {
         title: 'Tạo mới / đăng sản phẩm',
         component: 'RequestProducts'
+      },
+      {
+        title: 'Duyệt sản phẩm',
+        component: 'ManageProduct'
       }
     ]
   },

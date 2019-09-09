@@ -262,7 +262,6 @@
                                 item-value="catalog_id"
                                 style="margin-top:0px;padding-top:0px"
                               ></v-select>
-                              <!-- <div>aa{{ catalog[catalog.status] }}</div> -->
                             </v-flex>
                           </v-layout>
                         </li>
@@ -299,6 +298,12 @@
                                 <v-toolbar-title
                                 >Mặt hàng {{ i + 1 }}</v-toolbar-title
                                 >
+                                <v-spacer />
+                                <v-toolbar-items>
+                                  <v-btn icon dark @click="closeItem(input, i)">
+                                    <v-icon>close</v-icon>
+                                  </v-btn>
+                                </v-toolbar-items>
                               </v-toolbar>
                               <v-card-text>
                                 <v-text-field
@@ -459,13 +464,6 @@ export default {
         supplier_product: '',
         category_detail_id: '',
         is_active_product: '',
-        // Product Details
-        // color_id: '',
-        // size_id: '',
-        // pd_image: '',
-        // quantity: '',
-        // SKU: '',
-        // price_details: ''
         product_detail: [],
         image_detail: []
       },
@@ -585,6 +583,16 @@ export default {
     async stepThree() {
       if (!this.product.product_name) {
         this.$refs.product_name.focus();
+      } else if (
+        this.product.product_name.includes('/') ||
+        this.product.product_name.includes('^') ||
+        this.product.product_name.includes('#') ||
+        this.product.product_name.includes('&') ||
+        this.product.product_name.includes('%') ||
+        this.product.product_name.includes('*') ||
+        this.product.product_name.includes('!')
+      ) {
+        this.$message.error('Tên sản phẩm không được có ký tự đặc biệt !');
       } else if (!this.product.product_code) {
         this.$refs.product_code.focus();
       } else if (!this.product.short_description) {
@@ -612,7 +620,9 @@ export default {
       }
     },
 
-    stepFour() {},
+    stepFour() {
+      this.step = 4;
+    },
 
     async submit() {
       let temp = [];
@@ -774,6 +784,9 @@ export default {
         quantity: '',
         price: ''
       });
+    },
+    closeItem(item, i) {
+      this.inputs.splice(i, 1);
     }
   }
 };

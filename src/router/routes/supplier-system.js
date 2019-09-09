@@ -20,6 +20,7 @@ export default [
     name: 'Products',
     component: () => import('modules/supplier/products')
   },
+
   {
     path: '/pd/request-products',
     meta: {
@@ -29,6 +30,16 @@ export default [
     },
     name: 'RequestProducts',
     component: () => import('modules/supplier/request-products')
+  },
+  {
+    path: '/manage-product',
+    meta: {
+      requiresAuth: true,
+      group: 'products',
+      title: 'Duyệt sản phẩm'
+    },
+    name: 'ManageProduct',
+    component: () => import('modules/manage-product')
   },
   {
     path: '/new-product',

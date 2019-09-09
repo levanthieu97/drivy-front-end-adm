@@ -465,8 +465,6 @@ export default {
   },
 
   created() {
-    console.log(this.theSupplier);
-    console.log(this.me);
     this.loadData();
     this.loadDataNoActive();
   },
@@ -624,7 +622,7 @@ export default {
           });
         }
       }
-      console.log(data_product_detail.data);
+      // console.log(data_product_detail.data);
 
       if (this.list_product.length > 0) {
         this.items = this.list_product;
@@ -635,7 +633,7 @@ export default {
       const data_product = await this.searchProductNoActive({
         supplierProfileId: this.theSupplier
       });
-      console.log(data_product);
+      // console.log(data_product);
       if (data_product.data != null) {
         if (data_product.data.products.length > 0) {
           this.products_no_active = data_product.data.products;
@@ -655,7 +653,6 @@ export default {
               let raw = window.atob(temp);
               let rawLength = raw.length;
               let array = new Uint8Array(new ArrayBuffer(rawLength));
-
               for (let i = 0; i < rawLength; i++) {
                 array[i] = raw.charCodeAt(i);
               }
